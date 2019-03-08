@@ -18,7 +18,7 @@ def create_app():
     register_extensions(app)
     register_shell_context(app)
     register_template_context(app)
-    register_errors(app)
+    # register_errors(app)
     register_commands(app)
     return app
 
@@ -48,7 +48,7 @@ def register_template_context(app):
     @app.context_processor
     def make_template_context():
         user = User.query.first()
-        categories = Category.query.order_by(Category.cid).all()
+        categories = Category.query.order_by(Category.id).all()
         return dict(user=user, categories=categories)
 
 

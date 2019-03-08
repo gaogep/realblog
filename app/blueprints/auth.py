@@ -20,9 +20,10 @@ def login():
         if user and user.check_password(password):
             login_user(user, remember)
             flash('登录成功', 'success')
+            return "<h1>欢迎</h1>"
         else:
             flash('登录失败', 'warning')
-    return render_template('login.html')
+    return render_template('login.html', form=form)
 
 
 @auth_bp.route('/logout')

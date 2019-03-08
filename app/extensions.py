@@ -5,8 +5,6 @@ from flask_wtf import CSRFProtect
 from flask_login import LoginManager
 from flask_moment import Moment
 
-from .models import User
-
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -18,7 +16,9 @@ moment = Moment()
 
 @login_manager.user_loader
 def get_user(user_id):
-    return User.query.get(int(user_id))
+    from .models import User
+    user = User.query.get(int(user_id))
+    return user
 
 
 login_manager.login_view = 'auth.login'
