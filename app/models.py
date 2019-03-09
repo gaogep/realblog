@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.Text)
+    confirmed = db.Column(db.Boolean, default=False)
     posts = db.relationship('Post', back_populates='user')
 
     def set_password(self, password):

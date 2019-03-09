@@ -12,7 +12,9 @@
 <body>
 {% block nav %}
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Flylog</a>
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="mylogo" width="40">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,9 +23,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarblogdrop" data-toggle="dropdown">博文</a>
                     <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Python</a>
-                            <a class="dropdown-item" href="#">Golang</a>
-                            <a class="dropdown-item" href="#">随便写写</a>
+                        {% for category in categories %}
+                            <a class="dropdown-item" href="#">{{ category.name }}</a>
+                        {% endfor %}
                     </div>
                 </li>
                 <li class="nav-item">

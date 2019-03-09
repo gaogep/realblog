@@ -9,7 +9,7 @@ fake = Faker(locale='zh_CN')
 
 
 def fake_user():
-    user = User(is_admin=True, username='AdminZpf', about_me='天坑专业自救中...')
+    user = User(is_admin=True, username='AdminZpf', about_me='天坑专业自救中...', confirmed=True)
     user.set_password('123654Zz')
     db.session.add(user)
     db.session.commit()
