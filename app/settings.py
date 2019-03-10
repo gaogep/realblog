@@ -7,6 +7,8 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
 
+    BLOG_PER_PAGE = 6
+
 
 class DevConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DB')

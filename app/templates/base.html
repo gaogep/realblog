@@ -3,7 +3,7 @@
 <head>
     {% block head %}
     <meta charset="utf-8">
-    <meta name="author" content="Zhang pengfei">
+    <meta name="author" content="Zhang-Pengfei">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -11,7 +11,7 @@
 </head>
 <body>
 {% block nav %}
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <a class="navbar-brand" href="#">
             <img src="{{ url_for('static', filename='logo.jpg') }}" alt="mylogo" width="40">
         </a>
@@ -58,6 +58,8 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
 {% endblock scripts %}
+{{ moment.locale('zh-cn') }}
 </body>
 </html>
