@@ -1,0 +1,17 @@
+{% if posts %}
+    {% for post in posts %}
+        <div class="article-abstract" style="background-color: #fff">
+            <h4 >{{ post.title }}</h4>
+            <p style="text-align: justify">
+                {{ post.content|striptags|truncate }}
+                <small><a href="#">更多</a></small>
+            </p>
+            分类:<a href="#">{{ post.category.name }}</a>
+            <span class="float-right">{{ moment(post.timestamp).format('LL') }}</span>
+            {% if not loop.last %}
+                <hr>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div style="margin-top: 40px;position: relative;left: 130px">{{ render_pagination(pagination) }}</div>
+{% endif %}

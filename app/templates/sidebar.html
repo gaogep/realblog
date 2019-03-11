@@ -1,0 +1,27 @@
+{% if categories %}
+    <div class="card" style="position: relative; left: 20px">
+        <div class="card-header"><strong>文章分类</strong></div>
+        <ul class="list-group list-group-flush">
+            {% for catgory in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href=#>{{ catgory.name }}</a>
+                <span class="badge badge-primary badge-pill">{{ catgory.posts|length }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+<div class="card" style="position: relative; left: 20px">
+        <div class="card-header"><strong>关于我</strong></div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href=#>GitHub</a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href=#>Google+</a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href=#>Twitter</a>
+            </li>
+        </ul>
+</div>

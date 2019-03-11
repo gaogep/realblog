@@ -7,7 +7,7 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
 
-    BLOG_PER_PAGE = 6
+    BLOG_PER_PAGE = 5
 
 
 class DevConfig(BaseConfig):
