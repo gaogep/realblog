@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% endblock head %}
+    {% block style %}{% endblock %}
 </head>
 <body style="background: #f1f1f1">
 {% block nav %}
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <a class="navbar-brand" href="#">
-            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="mylogo" width="40">
+            张鹏飞的博客
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>

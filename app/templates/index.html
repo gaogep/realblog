@@ -3,8 +3,17 @@
 
 {% block title %}主页{% endblock %}
 
+{% block style %}
+    <style>
+        div.row {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-<div class="row" style="margin-top: 50px; margin-bottom: 50px">
+<div class="row" >
     <div class="col-md-9">
         {% include 'listposts.html' %}
     </div>

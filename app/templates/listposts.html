@@ -1,17 +1,65 @@
 {% if posts %}
+    {% block style %}
+        <style>
+            div.article-abstract {
+                background-color: #fff;
+                margin-bottom: 30px;
+                border-radius: 15px;
+            }
+
+            h5.blog-title {
+                padding-left: 15px;
+                padding-top: 25px;
+            }
+
+            small.blog-info {
+                padding-left: 18px;
+            }
+
+            p.blog-content {
+                padding-left: 15px;
+                padding-right: 15px;
+                text-align: justify;
+            }
+
+            a.badge.badge-pill.badge-secondary {
+                color: #fff;
+            }
+
+            a.into-article {
+                padding-left: 15px;
+                color: black;
+            }
+
+            div.render-page {
+                margin-top: 20px;
+                position: relative;
+                left: 220px;
+            }
+        </style>
+    {% endblock %}
     {% for post in posts %}
-        <div class="article-abstract" style="background-color: #fff">
-            <h4 >{{ post.title }}</h4>
-            <p style="text-align: justify">
-                {{ post.content|striptags|truncate }}
-                <small><a href="#">更多</a></small>
+        <div class="article-abstract" >
+            <h5 class="blog-title"><strong>{{ post.title }}</strong></h5>
+            <small class="blog-info">
+                <span>{{ moment(post.timestamp).format('LL') }}</span>
+                /
+                <span>
+                    <a class="badge badge-pill badge-secondary" href="#">
+                        {{ post.category.name }}
+                    </a>
+                </span>
+            </small>
+            <p class="blog-content" >
+                {{ post.content|striptags|truncate(length=120) }}
             </p>
-            分类:<a href="#">{{ post.category.name }}</a>
-            <span class="float-right">{{ moment(post.timestamp).format('LL') }}</span>
+            <a class="into-article" href=# >阅读全文 ></a>
             {% if not loop.last %}
                 <hr>
             {% endif %}
         </div>
     {% endfor %}
-    <div style="margin-top: 40px;position: relative;left: 130px">{{ render_pagination(pagination) }}</div>
+    <div class="render-page >
+        {{ render_pagination(pagination) }}
+    </div>
 {% endif %}
