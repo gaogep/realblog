@@ -29,8 +29,10 @@ def fake_categories(cnt=10):
 
 def fake_posts(cnt=50):
     category_nums = Category.query.count()
+    user_nums = User.query.count()
     for i in range(cnt):
         post = Post(title=fake.sentence(),
+                    user=User.query.get(1),
                     content=fake.text(1000),
                     category=Category.query.get(random.randint(1, category_nums)),
                     timestamp=fake.date_time_this_year())

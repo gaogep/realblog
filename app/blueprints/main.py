@@ -11,4 +11,4 @@ def index(page):
     per_page = current_app.config['BLOG_PER_PAGE']
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page)
     posts = pagination.items
-    return render_template('index.html', pagination=pagination, posts=posts)
+    return render_template('main/index.html', pagination=pagination, posts=posts)
