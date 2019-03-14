@@ -5,6 +5,10 @@
                 position: relative;
                 left: 20px;
             }
+
+            a.connection {
+                color: black;
+            }
         </style>
     {% endblock %}
 
@@ -13,8 +17,8 @@
         <ul class="list-group list-group-flush">
             {% for catgory in categories %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href=#>{{ catgory.name }}</a>
-                <span class="badge badge-secondary badge-pill">{{ catgory.posts|length }}</span>
+                <a href=# style="color: black">{{ catgory.name }}</a>
+                <span class="badge badge-success badge-pill">{{ catgory.posts|length }}</span>
             </li>
             {% endfor %}
         </ul>
@@ -24,13 +28,13 @@
         <div class="card-header"><strong>关于我</strong></div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href=#>GitHub</a>
+                <a class="connection" href=#>GitHub</a>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href=#>Google+</a>
+                <a class="connection" href=#>Google+</a>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href=#>Twitter</a>
+                <a class="connection" href=#>Twitter</a>
             </li>
         </ul>
 </div>
