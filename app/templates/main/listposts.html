@@ -28,11 +28,6 @@
                 color: black;
             }
 
-            {#div.render-page {#}
-            {#    margin-top: 20px;#}
-            {#    position: relative;#}
-            {#    left: 220px;#}
-
             span.author {
                 margin-left: 15px;
             }
@@ -121,5 +116,5 @@
             {% endif %}
         </div>
     {% endfor %}
-    {{ render_pagination(pagination, align='center', color='black') }}
+    {{ render_pagination(pagination, align='center') }}
 {% endif %}

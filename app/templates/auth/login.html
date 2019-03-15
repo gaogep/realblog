@@ -4,8 +4,11 @@
 {% block title %}登录{% endblock %}
 
 {% block content %}
-    <div class="container" style="margin:220px auto 10px auto">
-        <div class="row justify-content-center">
+    <div class="container h-100">
+        <div class="row h-100 page-header justify-content-center align-items-center">
+            <h4>登录</h4>
+        </div>
+        <div class="row h-100 page-header justify-content-center align-items-center">
             {{ render_form(form, extra_classes='col-6') }}
         </div>
     </div>
