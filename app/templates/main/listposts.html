@@ -1,15 +1,18 @@
+{% from 'macros.html' import render_page %}
+
 {% if posts %}
     {% block style %}
         <style>
             div.article-abstract {
                 background-color: #fff;
                 margin-bottom: 30px;
+                padding-bottom: 15px;
                 border-radius: 15px;
             }
 
             h5.blog-title {
                 padding-left: 15px;
-                padding-top: 25px;
+                padding-top: 20px;
             }
 
             small.blog-info {
@@ -24,27 +27,15 @@
             }
 
             a.into-article {
-                margin-left: 40px;
                 color: black;
             }
 
             span.author {
-                margin-left: 15px;
-            }
-
-            span.time {
-                margin-left: 60px;
-            }
-
-            span.category {
-                margin-left: 60px;
-            }
-
-            span.read-article {
-                margin-left: 40px;
+                margin-left: 15px !important;
             }
 
             span.blog-info {
+                margin-left: 90px;
                 display: inline-block;
             }
 
@@ -111,10 +102,8 @@
             <span class="blog-info read-article">
                 <a class="blog-info into-article" href=# ><i class="icon-read"></i>阅读全文</a>
             </span>
-            {% if not loop.last %}
-                <hr>
-            {% endif %}
         </div>
     {% endfor %}
-    {{ render_pagination(pagination, align='center') }}
+    <hr>
+    {{ render_page(pagination, '.index') }}
 {% endif %}

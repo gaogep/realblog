@@ -1,0 +1,32 @@
+{% macro render_page(pagination, endpoint) %}
+<ul class="pagination justify-content-center">
+   <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
+       <a class="page-link" href="{% if pagination.has_prev %}
+        {{ url_for(endpoint, page=pagination.page - 1, **kwargs) }}{% else %}#{% endif %}" style="color: black">
+           上一页
+       </a>
+   </li>
+    {% for p in pagination.iter_pages() %}
+    {% if p %}
+        {% if p == pagination.page %}
+        <li class="page-item active" >
+            <a class="page-link" href="{{ url_for(endpoint, page = p, **kwargs) }}"
+               style="color: white; background-color: #787e84; border-color: #787e84">{{ p }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for(endpoint, page = p, **kwargs) }}" style="color: black">{{ p }}</a>
+        </li>
+        {% endif %}
+    {% else %}
+    <li class="disabled"><a href=# style="color: black">&hellip;</a></li>
+    {% endif %}
+    {% endfor %}
+    <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
+        <a class="page-link" href="{% if pagination.has_next %}
+        {{ url_for(endpoint, page=pagination.page + 1, **kwargs) }}{% else %}#{% endif %}" style="color: black">
+            下一页
+        </a>
+    </li>
+</ul>
+{% endmacro %}
