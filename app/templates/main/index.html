@@ -2,19 +2,10 @@
 
 {% block title %}主页{% endblock %}
 
-{% block style %}
-    <style>
-        div.row {
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
-<div class="row" >
+<div class="row mt-5 mb-5" >
     <div class="col-md-9">
-        {% include 'main/listposts.html' %}
+        {% include 'main/posts.html' %}
     </div>
     <div class="col-md-3">
         {% include 'main/sidebar.html' %}

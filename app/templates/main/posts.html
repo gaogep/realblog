@@ -3,43 +3,14 @@
 {% if posts %}
     {% block style %}
         <style>
-            div.article-abstract {
-                background-color: #fff;
+            div.article-zone {
+                 background-color: #fff;
                 margin-bottom: 30px;
                 padding-bottom: 15px;
                 border-radius: 15px;
             }
 
-            h5.blog-title {
-                padding-left: 15px;
-                padding-top: 20px;
-            }
-
-            small.blog-info {
-                padding-left: 18px;
-            }
-
-            p.blog-content {
-                padding-left: 15px;
-                padding-right: 15px;
-                text-align: justify;
-                margin-bottom: 10px;
-            }
-
-            a.into-article {
-                color: black;
-            }
-
-            span.author {
-                margin-left: 15px !important;
-            }
-
-            span.blog-info {
-                margin-left: 90px;
-                display: inline-block;
-            }
-
-            i.icon-author {
+            i.author-icon {
                 margin-bottom: -3px;
                 margin-right: 3px;
                 display: inline-block;
@@ -50,7 +21,7 @@
                 background-repeat: no-repeat;
             }
 
-            i.icon-time {
+            i.time-icon {
                 margin-bottom: -5px;
                 margin-right: 4px;
                 display: inline-block;
@@ -61,7 +32,7 @@
                 background-repeat: no-repeat;
             }
 
-            i.icon-cate {
+            i.category-icon {
                 margin-bottom: -5px;
                 margin-right: 4px;
                 display: inline-block;
@@ -72,7 +43,7 @@
                 background-repeat: no-repeat;
             }
 
-            i.icon-read {
+            i.read-icon {
                 margin-bottom: -5px;
                 margin-right: 4px;
                 display: inline-block;
@@ -85,23 +56,25 @@
         </style>
     {% endblock %}
     {% for post in posts %}
-        <div class="article-abstract" >
-            <h5 class="blog-title"><strong>{{ post.title }}</strong></h5>
-            <p class="blog-content" >
-                {{ post.content|striptags|truncate(length=120) }}
+        <div class="article-zone">
+            <h5 class="blog-title pl-3 pr-3 pt-3"><strong>{{ post.title }}</strong></h5>
+            <p class="blog-content pl-3 pr-3 mt-1 text-justify" >
+                {{ post.content|striptags|truncate(length=130) }}
             </p>
-            <span class="blog-info author">
-                <i class="icon-author"></i>{{ post.user.username }}
-            </span>
-            <span class="blog-info time">
-                <i class="icon-time"></i>{{ moment(post.timestamp).format('L') }}
-            </span>
-            <span class="blog-info category">
-                <i class="icon-cate"></i>{{ post.category.name }}
-            </span>
-            <span class="blog-info read-article">
-                <a class="blog-info into-article" href=# ><i class="icon-read"></i>阅读全文</a>
-            </span>
+            <div class="d-flex justify-content-between">
+                <div class="author pl-3">
+                    <i class="author-icon"></i>{{ post.user.username }}
+                </div>
+                <div class="time">
+                    <i class="time-icon"></i>{{ moment(post.timestamp).format('L') }}
+                </div>
+                <div class="category">
+                    <i class="category-icon"></i>{{ post.category.name }}
+                </div>
+                <div class="read pr-3">
+                    <a href=# class="read-article" style="color: black"><i class="read-icon"></i>阅读全文</a>
+                </div>
+            </div>
         </div>
     {% endfor %}
     <hr>

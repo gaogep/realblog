@@ -24,18 +24,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.index') }}">主页</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">博文</a>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            新建
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">博文</a>
+                            <a class="dropdown-item" href="#">分类</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            设置
+                            管理
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">博文</a>
+                            <a class="dropdown-item" href="#">分类</a>
+                            <a class="dropdown-item" href="#">评论</a>
                         </div>
                     </li>
                 </ul>

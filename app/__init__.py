@@ -18,7 +18,7 @@ def create_app():
     register_extensions(app)
     register_shell_context(app)
     register_template_context(app)
-    # register_errors(app)
+    register_errors(app)
     register_commands(app)
     return app
 
