@@ -12,3 +12,9 @@ def index(page):
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page)
     posts = pagination.items
     return render_template('main/index.html', pagination=pagination, posts=posts)
+
+
+@main_bp.route('/post/<int:post_id>')
+def show_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('main/post.html', post=post)

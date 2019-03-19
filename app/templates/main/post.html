@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="page-header mt-5 mb-3">
+    <h2 class=>{{ post.title }}</h2>
+    <div class="d-flex flex-column pl-1">
+        <div class="category-badge">
+            <span class="badge badge-secondary">分类</span>
+            <span class="ml-2">{{ post.category.name }}</span>
+        </div>
+        <div class="time-badge">
+            <span class="badge badge-secondary">时间</span>
+            <span class="ml-2">{{ moment(post.timestamp).format('L') }}</span>
+        </div>
+    </div>
+</div>
+<div class="row mb-2 mb-5">
+    <div class="col-md-9 text-justify">
+        {{ post.content|safe }}
+    </div>
+    <div class="col-md-3">
+        {% include 'main/sidebar.html' %}
+    </div>
+</div>
+{% endblock %}

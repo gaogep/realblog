@@ -22,4 +22,6 @@ def get_user(user_id):
 
 
 login_manager.login_view = 'auth.login'
+login_manager.login_message = '请先登录'
 login_manager.login_message_category = 'warning'
+

@@ -4,7 +4,7 @@
     {% block style %}
         <style>
             div.article-zone {
-                 background-color: #fff;
+                background-color: #fff;
                 margin-bottom: 30px;
                 padding-bottom: 15px;
                 border-radius: 15px;
@@ -72,7 +72,9 @@
                     <i class="category-icon"></i>{{ post.category.name }}
                 </div>
                 <div class="read pr-3">
-                    <a href=# class="read-article" style="color: black"><i class="read-icon"></i>阅读全文</a>
+                    <a href="{{ url_for('main.show_post', post_id=post.id) }}" class="read-article" style="color: black">
+                        <i class="read-icon"></i>阅读全文
+                    </a>
                 </div>
             </div>
         </div>
