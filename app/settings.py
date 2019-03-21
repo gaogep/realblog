@@ -8,6 +8,7 @@ class BaseConfig:
     SQLALCHEMY_RECORD_QUERIES = True
 
     BLOG_PER_PAGE = 8
+    BLOG_COMMENT_PER_PAGE = 15
 
 
 class DevConfig(BaseConfig):
