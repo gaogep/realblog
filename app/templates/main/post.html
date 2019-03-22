@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% from 'macros.html' import render_page %}
+{% from 'bootstrap/form.html' import render_form %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -16,7 +17,7 @@
     </div>
 </div>
 <div class="row mb-2 mb-5">
-    <div class="col-md-8 text-justify">
+    <div class="col-md-9 text-justify">
         <p>
             {{ post.content|safe }}
         </p>
@@ -35,14 +36,30 @@
                                         {% else %}
                                             {{ comment.author }}
                                         {% endif %}
+                                        {% if current_user.is_authenticated %}
+                                            <form method="post" style="display: inline"
+                                                  action="{{ url_for('main.delete_comment', id=comment.id) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                <input class="btn btn-danger" type="submit" value="删除评论"/>
+                                            </form>
+                                        {% endif %}
                                     </span>
-                                    <span class="float-right">{{ comment.timestamp }}</span>
+                                    <span class="float-right">{{ moment(comment.timestamp).format('LL') }}</span>
                                 </div>
-                                <div class="mt-2 mb-2">{{ comment.content }}</div>
+                                <div class="mt-2 mb-2">
+                                    {{ comment.content }}
+                                    <span class="float-right"><a class="text-secondary" href=#>回复</a></span>
+                                </div>
                             </div>
                         </li>
                     {% endfor %}
                 </ul>
+                <div class="comment-pagination mt-5">
+                    {{ render_page(pagination, '.index') }}
+                </div>
+                <div class="comment-form">
+                    {{ render_form(form) }}
+                </div>
             </div>
         {% endif %}
     </div>

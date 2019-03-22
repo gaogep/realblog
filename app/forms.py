@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
 
 from .models import User
@@ -30,3 +30,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('密码', validators=[DataRequired(), Length(1, 20)])
     remember = BooleanField('记住我')
     submit = SubmitField('登录')
+
+
+class CommentForm(FlaskForm):
+    author = StringField('作者', validators=[DataRequired(), Length(1, 20)])
+    # email = StringField('邮箱', validators=[DataRequired(), Email(), Length(1, 254)])
+    content = TextAreaField('评论', validators=[DataRequired(), Length(1, 200)])
+    submit = SubmitField('提交')
