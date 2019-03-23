@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
+from flask_pagedown.fields import PageDownField
 
 from .models import User
 
@@ -34,6 +35,12 @@ class LoginForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     author = StringField('作者', validators=[DataRequired(), Length(1, 20)])
-    # email = StringField('邮箱', validators=[DataRequired(), Email(), Length(1, 254)])
+    email = StringField('邮箱', validators=[DataRequired(), Email(), Length(1, 254)])
     content = TextAreaField('评论', validators=[DataRequired(), Length(1, 200)])
+    submit = SubmitField('提交')
+
+
+class PostWritingFrom(FlaskForm):
+    title = StringField('题目', validators=[DataRequired(), Length(1, 200)])
+    pagedown = PageDownField(validators=[DataRequired()])
     submit = SubmitField('提交')

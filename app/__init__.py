@@ -35,7 +35,8 @@ def register_extensions(app):
     migrate.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
-    moment.init_app(app) 
+    moment.init_app(app)
+    pagedown.init_app(app)
 
 
 def register_shell_context(app):

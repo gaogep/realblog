@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager
 from flask_moment import Moment
+from flask_pagedown import PageDown
 
 
 bootstrap = Bootstrap()
@@ -12,6 +13,7 @@ migrate = Migrate()
 csrf = CSRFProtect()
 login_manager = LoginManager()
 moment = Moment()
+pagedown = PageDown()
 
 
 @login_manager.user_loader
