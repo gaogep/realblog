@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app, flash, redirect, url_for
 from flask_login import current_user, login_required
 
-from ..models import Post, Comment
+from ..models import Post, Comment, Category
 from ..forms import CommentForm, PostWritingFrom
 from ..extensions import db
 from ..tools import redirect_back
@@ -62,4 +62,5 @@ def delete_comment(id):
 @login_required
 def new_post():
     form = PostWritingFrom()
+    form.category.choices = [(category.name, category.name) for category in Category.query.all()]
     return render_template('main/editor.html', form=form)

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
 from flask_pagedown.fields import PageDownField
 
@@ -42,5 +42,6 @@ class CommentForm(FlaskForm):
 
 class PostWritingFrom(FlaskForm):
     title = StringField('题目', validators=[DataRequired(), Length(1, 200)])
+    category = SelectField('请选择分类')
     pagedown = PageDownField(validators=[DataRequired()])
     submit = SubmitField('提交')

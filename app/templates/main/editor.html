@@ -1,22 +1,35 @@
 {% extends "base.html" %}
-{% from 'bootstrap/form.html' import render_form %}
 
 {% block title %}编辑文章{% endblock %}
 
 {% block content %}
-    <div class="row mt-5 mb-5">
-        <div class="col-md-6">
-            <form method="POST">
-                {{ form.csrf_token }}
-                {{ form.title.label }}<br>
-                {{ form.title }}
-                {{ form.pagedown(rows=20) }}
-                {{ form.submit }}
-            </form>
-        </div>
-        <div class="col-md-6">
-
-        </div>
+    <div class="write-post mt-5 mb-5">
+        <form action=# method="post" class="post-form">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.title(class="form-control", placeholder="请输入文章标题") }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.category(class="form-control", placeholder="请输入文章分类") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.pagedown(only_input=True, rows=20, class="form-control") }}
+                    </div>
+                    <div class="col-md-6" style="background-color: whitesmoke">
+                        {{ form.pagedown(only_preview=True, class="form-control") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group float-right">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+        </form>
     </div>
 {% endblock %}
 
