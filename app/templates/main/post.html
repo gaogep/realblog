@@ -30,25 +30,37 @@
                         <li class="list-group-item list-group-item-action">
                             <div class="d-flex flex-column">
                                 <div>
-                                    <span>
+                                    <span class="delete-comment-form">
                                         {% if comment.from_admin %}
                                             <span class="badge badge-success">管理员</span>
+                                        {% elif comment.parent_comment %}
+                                            {{ comment.author }}回复{{ comment.parent_comment.author }}
                                         {% else %}
                                             {{ comment.author }}
                                         {% endif %}
-{#                                        {% if current_user.is_authenticated %}#}
-{#                                            <form method="post" style="display: inline"#}
-{#                                                  action="{{ url_for('main.delete_comment', id=comment.id) }}">#}
-{#                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
-{#                                                <button class="btn btn-danger btn-sm" type="submit">删除评论</button>#}
-{#                                            </form>#}
-{#                                        {% endif %}#}
+                                        {% if current_user.is_authenticated %}
+                                            <form method="post" style="display: inline"
+                                                  action="{{ url_for('main.delete_comment', id=comment.id) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                <input alt="delete-button" type="image" src="../../static/delete.png" />
+                                            </form>
+                                        {% endif %}
                                     </span>
                                     <span class="float-right">{{ moment(comment.timestamp).format('LL') }}</span>
                                 </div>
                                 <div class="mt-2 mb-2">
+                                    {% if comment.parent_comment %}
+                                        <p class="alert alert-dark reply-body">{{ comment.parent_comment.author }}:
+                                            <br>{{ comment.parent_comment.content }}
+                                        </p>
+                                    {% endif %}
                                     {{ comment.content }}
-                                    <span class="float-right"><a class="text-secondary" href=#>回复</a></span>
+                                    <span class="float-right">
+                                        <a class="text-secondary"
+                                           href="{{ url_for('main.reply_comment', comment_id=comment.id) }}">
+                                            回复
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </li>
@@ -57,7 +69,15 @@
                 <div class="comment-pagination mt-5">
                     {{ render_page(pagination, '.index') }}
                 </div>
-                <div class="comment-form">
+                {% if request.args.get('reply') %}
+                    <div class="alert alert-dark">
+                        回复<strong>{{ request.args.get('author') }}</strong>:
+                        <a class="float-right text-dark" href="{{ url_for('main.show_post', post_id=post.id) }}">
+                            取消
+                        </a>
+                    </div>
+                {% endif %}
+                <div id="comment-form">
                     {{ render_form(form) }}
                 </div>
             </div>

@@ -38,12 +38,16 @@ def show_post(post_id):
         author = form.author.data
         content = form.content.data
         comment = Comment(author=author, content=content, post=post, from_admin=from_admin)
+        parent_comment_id = request.args.get('reply')
+        if parent_comment_id:
+            parent_comment = Comment.query.get_or_404(parent_comment_id)
+            comment.parent_comment = parent_comment
         db.session.add(comment)
         db.session.commit()
         if from_admin:
             flash('评论成功', 'success')
         else:
-            flash('谢谢你给出的建议', 'success')
+            flash('评论完成', 'success')
         return redirect(url_for('main.show_post', post_id=post_id))
     return render_template('main/post.html', post=post, comments=comments, pagination=pagination, form=form)
 
@@ -63,4 +67,18 @@ def delete_comment(id):
 def new_post():
     form = PostWritingFrom()
     form.category.choices = [(category.name, category.name) for category in Category.query.all()]
+    if form.validate_on_submit():
+        title = form.title.data
+        category = form.category.data
+        content = form.pagedown.data
+        post = Post(title=title, category=category, content=content)
+        db.session.add(post)
+        db.session.commit()
     return render_template('main/editor.html', form=form)
+
+
+@main_bp.route('/reply/comment/<int:comment_id>')
+def reply_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    return redirect(
+        url_for('.show_post', post_id=comment.post_id, reply=comment_id, author=comment.author) + '#comment-form')
