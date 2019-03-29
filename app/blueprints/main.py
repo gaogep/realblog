@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, current_app, flash, redirect, url_for
+from flask import Blueprint, render_template, request, current_app, flash, redirect, url_for, abort, make_response
 from flask_login import current_user, login_required
 
 from ..models import Post, Comment, Category
@@ -82,3 +82,13 @@ def reply_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     return redirect(
         url_for('.show_post', post_id=comment.post_id, reply=comment_id, author=comment.author) + '#comment-form')
+
+
+@main_bp.route('/change-theme/<theme_name>')
+def change_theme(theme_name):
+    if theme_name not in current_app.config['BLOG_THEMES']:
+        abort(404)
+
+    response = make_response(redirect_back())
+    response.set_cookie('theme', theme_name, max_age=30*24*60*60)
+    return response

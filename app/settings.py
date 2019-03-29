@@ -10,6 +10,8 @@ class BaseConfig:
     BLOG_PER_PAGE = 8
     BLOG_COMMENT_PER_PAGE = 15
 
+    BLOG_THEMES = {'bootstrap': '默认', 'lumen': 'lumen'}
+
 
 class DevConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DB')
