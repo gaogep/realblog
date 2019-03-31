@@ -15,10 +15,10 @@
     <div class="card">
         <div class="card-header">文章分类</div>
         <ul class="list-group list-group-flush">
-            {% for catgory in categories %}
+            {% for category in categories %}
             <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                <a href=# style="color: black">{{ catgory.name }}</a>
-                <span class="badge badge-success badge-pill">{{ catgory.posts|length }}</span>
+                <a href=# style="color: black">{{ category.name }}</a>
+                <span class="badge badge-success badge-pill">{{ category.posts|length }}</span>
             </li>
             {% endfor %}
         </ul>
@@ -39,7 +39,7 @@
         </ul>
 </div>
 <div class="dropdown mt-3 ml-3">
-    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    <button class="btn btn-link dropdown-toggle text-dark" data-toggle="dropdown">
         更换主题
     </button>
     <div class="dropdown-menu">

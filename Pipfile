@@ -16,6 +16,7 @@ flask-migrate = "*"
 python-dotenv = "*"
 faker = "*"
 sendgrid = "*"
+flask-debugtoolbar = "*"
 
 [requires]
 python_version = "3.7"

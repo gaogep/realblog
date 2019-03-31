@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
 from flask_pagedown.fields import PageDownField
 
-from .models import User
+from .models import User, Category
 
 
 class RegisterForm(FlaskForm):
@@ -45,3 +45,7 @@ class PostWritingFrom(FlaskForm):
     category = SelectField('请选择分类')
     pagedown = PageDownField(validators=[DataRequired()])
     submit = SubmitField('提交')
+
+    def __int__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.category.choices = [(int(category.id), category.name) for category in Category.query.all()]
