@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}编辑文章{% endblock %}
+
+{% block content %}
+    {{ render_form(form) }}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

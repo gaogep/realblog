@@ -66,7 +66,7 @@ def delete_comment(id):
 @login_required
 def new_post():
     form = PostWritingFrom()
-    form.category.choices = [(int(category.id), category.name) for category in Category.query.all()]
+    form.category.choices = [(category.id, category.name) for category in Category.query.all()]
     if form.validate_on_submit():
         title = form.title.data
         category = Category.query.get(form.category.data)
@@ -75,8 +75,8 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('发布成功', 'success')
-        redirect(url_for('main.show_post', post_id=post.id))
-    return render_template('main/editor.html', form=form)
+        return redirect(url_for('main.show_post', post_id=post.id))
+    return render_template('main/editor2.html', form=form)
 
 
 @main_bp.route('/reply/comment/<int:comment_id>')

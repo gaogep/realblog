@@ -34,7 +34,7 @@
                                         {% if comment.from_admin %}
                                             <span class="badge badge-success">管理员</span>
                                         {% elif comment.parent_comment %}
-                                            {{ comment.author }}回复{{ comment.parent_comment.author }}
+                                            {{ comment.author }}<strong>回复</strong>{{ comment.parent_comment.author }}
                                         {% else %}
                                             {{ comment.author }}
                                         {% endif %}
