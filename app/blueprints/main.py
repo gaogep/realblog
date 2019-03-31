@@ -66,6 +66,7 @@ def delete_comment(id):
 @login_required
 def new_post():
     form = PostWritingFrom()
+    form.category.choices = [(int(category.id), category.name) for category in Category.query.all()]
     if form.validate_on_submit():
         title = form.title.data
         category = Category.query.get(form.category.data)

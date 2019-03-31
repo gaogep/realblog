@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="write-post mt-5 mb-5">
-        <form action=# method="post" class="post-form">
+        <form action="{{ url_for('main.new_post') }}" method="post" class="post-form">
             {{ form.csrf_token }}
             <div class="form-group">
                 <div class="row">

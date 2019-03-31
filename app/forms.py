@@ -45,7 +45,3 @@ class PostWritingFrom(FlaskForm):
     category = SelectField('请选择分类')
     pagedown = PageDownField(validators=[DataRequired()])
     submit = SubmitField('提交')
-
-    def __int__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.category.choices = [(int(category.id), category.name) for category in Category.query.all()]
