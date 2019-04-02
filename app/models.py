@@ -1,6 +1,8 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from markdown import markdown
+import bleach
 
 from .extensions import db
 
@@ -31,12 +33,22 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
     content = db.Column(db.Text)
+    html_content = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', back_populates='posts')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', back_populates='posts')
     comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
+
+
+@db.event.listens_for(Post.content, 'set', named=True)
+def on_chenge_content(**kwargs):
+    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i'
+                    'li', 'ol', 'pre', 'strong', 'ul', 'h1', 'h2', 'h3', 'h4', 'h5', 'p']
+    # linkify函数->将纯文本中的url转换为合适的<a>链接
+    kwargs['target'].html_content = bleach.linkify(bleach.clean(
+        markdown(kwargs['value'], output_format='html'), tags=allowed_tags, strip=True))
 
 
 class Comment(db.Model):

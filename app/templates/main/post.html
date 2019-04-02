@@ -19,7 +19,11 @@
 <div class="row mb-2 mb-5">
     <div class="col-md-9 text-justify">
         <p>
-            {{ post.content|safe }}
+            {% if post.html_content %}
+                {{ post.html_content|safe }}
+            {% else %}
+                {{ post.content|safe }}
+            {% endif %}
         </p>
         <hr>
         {% if comments %}
@@ -77,11 +81,11 @@
                         </a>
                     </div>
                 {% endif %}
-                <div id="comment-form">
-                    {{ render_form(form) }}
-                </div>
             </div>
         {% endif %}
+        <div id="comment-form">
+            {{ render_form(form) }}
+        </div>
     </div>
     <div class="col-md-3">
         {% include 'main/sidebar.html' %}

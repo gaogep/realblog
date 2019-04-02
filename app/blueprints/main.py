@@ -31,6 +31,7 @@ def show_post(post_id):
     if current_user.is_authenticated:
         from_admin = True
         form.author.data = "张鹏飞"
+        form.email.data = "zpf1893@qq.com"
     else:
         from_admin = False
 
@@ -44,10 +45,7 @@ def show_post(post_id):
             comment.parent_comment = parent_comment
         db.session.add(comment)
         db.session.commit()
-        if from_admin:
-            flash('评论成功', 'success')
-        else:
-            flash('评论完成', 'success')
+        flash('评论成功', 'success')
         return redirect(url_for('main.show_post', post_id=post_id))
     return render_template('main/post.html', post=post, comments=comments, pagination=pagination, form=form)
 
