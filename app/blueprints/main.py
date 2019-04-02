@@ -19,6 +19,16 @@ def index(page):
     return render_template('main/index.html', pagination=pagination, posts=posts)
 
 
+@main_bp.route('/category/<cate>', defaults={'page': 1})
+@main_bp.route('/category/<cate>/page/<int:page>')
+def filter_post(cate, page):
+    per_page = current_app.config['BLOG_PER_PAGE']
+    category = Category.query.filter_by(name=cate).first()
+    pagination = Post.query.with_parent(category).order_by(Post.timestamp.desc()).paginate(page, per_page)
+    posts = pagination.items
+    return render_template('main/index.html', pagination=pagination, posts=posts)
+
+
 @main_bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def show_post(post_id):
     post = Post.query.get_or_404(post_id)

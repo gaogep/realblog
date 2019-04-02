@@ -17,7 +17,7 @@
         <ul class="list-group list-group-flush">
             {% for category in categories %}
             <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                <a href=# style="color: black">{{ category.name }}</a>
+                <a href="{{ url_for('main.filter_post', cate=category.name) }}" style="color: black">{{ category.name }}</a>
                 <span class="badge badge-success badge-pill">{{ category.posts|length }}</span>
             </li>
             {% endfor %}
