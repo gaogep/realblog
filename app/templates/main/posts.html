@@ -79,5 +79,9 @@
         </div>
         <hr>
     {% endfor %}
-    {{ render_page(pagination, 'main.index') }}
+    {% if not filter %}
+        {{ render_page(pagination, 'main.index') }}
+    {% else %}
+        test
+    {% endif %}
 {% endif %}

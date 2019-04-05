@@ -26,7 +26,7 @@ def filter_post(cate, page):
     category = Category.query.filter_by(name=cate).first()
     pagination = Post.query.with_parent(category).order_by(Post.timestamp.desc()).paginate(page, per_page)
     posts = pagination.items
-    return render_template('main/index.html', pagination=pagination, posts=posts)
+    return render_template('main/index.html', pagination=pagination, posts=posts, filter=1)
 
 
 @main_bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
