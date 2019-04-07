@@ -10,6 +10,8 @@ from ..tools import redirect_back
 main_bp = Blueprint('main', __name__)
 
 
+# 以下为两种不同的分页方式
+# 主页的分页方式为 -> 将页码写入url
 @main_bp.route('/', defaults={'page': 1})
 @main_bp.route('/page/<int:page>')
 def index(page):
@@ -19,14 +21,15 @@ def index(page):
     return render_template('main/index.html', pagination=pagination, posts=posts)
 
 
-@main_bp.route('/category/<cate>', defaults={'page': 1})
-@main_bp.route('/category/<cate>/page/<int:page>')
-def filter_post(cate, page):
+# 分类页面的分页方式为将页面附加到查询字符串中
+@main_bp.route('/category/<cate>')
+def filter_post(cate):
+    page = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLOG_PER_PAGE']
     category = Category.query.filter_by(name=cate).first()
     pagination = Post.query.with_parent(category).order_by(Post.timestamp.desc()).paginate(page, per_page)
     posts = pagination.items
-    return render_template('main/index.html', pagination=pagination, posts=posts, filter=1)
+    return render_template('main/index.html', pagination=pagination, posts=posts, filter=1, cate=cate)
 
 
 @main_bp.route('/post/<int:post_id>', methods=['GET', 'POST'])

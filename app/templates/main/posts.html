@@ -82,6 +82,6 @@
     {% if not filter %}
         {{ render_page(pagination, 'main.index') }}
     {% else %}
-        test
+        {{ render_page(pagination, 'main.filter_post', cate=cate) }}
     {% endif %}
 {% endif %}
