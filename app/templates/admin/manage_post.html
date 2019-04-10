@@ -48,7 +48,7 @@
                             </a>
                             <form style="display: inline;" method="post" action="{{ url_for('admin.delete_post', post_id=post.id) }}">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定删除吗?');">
+                                <button style="padding-top: 3px" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定删除吗?');">
                                     删除
                                 </button>
                             </form>
