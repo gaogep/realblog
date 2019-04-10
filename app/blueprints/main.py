@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, current_app, flash, redir
 from flask_login import current_user, login_required
 
 from ..models import Post, Comment, Category
-from ..forms import CommentForm, PostWritingFrom
+from ..forms import CommentForm
 from ..extensions import db
 from ..tools import redirect_back
 
@@ -71,23 +71,6 @@ def delete_comment(id):
     db.session.commit()
     flash('评论删除成功', 'success')
     return redirect_back()
-
-
-@main_bp.route('/post/new', methods=['GET', 'POST'])
-@login_required
-def new_post():
-    form = PostWritingFrom()
-    form.category.choices = [(category.id, category.name) for category in Category.query.all()]
-    if form.validate_on_submit():
-        title = form.title.data
-        category = Category.query.get(form.category.data)
-        content = form.pagedown.data
-        post = Post(title=title, category=category, content=content, user=current_user._get_current_object())
-        db.session.add(post)
-        db.session.commit()
-        flash('发布成功', 'success')
-        return redirect(url_for('main.show_post', post_id=post.id))
-    return render_template('main/editor2.html', form=form)
 
 
 @main_bp.route('/reply/comment/<int:comment_id>')
