@@ -8,6 +8,7 @@ class BaseConfig:
     SQLALCHEMY_RECORD_QUERIES = True
 
     BLOG_PER_PAGE = 8
+    BLOG_ADMIN_PER_PAGE = 10
     BLOG_COMMENT_PER_PAGE = 15
 
     BLOG_THEMES = {'bootstrap': '默认', 'lumen': 'lumen'}

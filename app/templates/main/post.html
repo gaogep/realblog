@@ -27,7 +27,7 @@
         </p>
         <hr>
         {% if comments %}
-            <div class="comments">
+            <div id="comments">
                 <h3>共{{ pagination.total }}条评论</h3>
                 <ul class="list-group">
                     {% for comment in comments %}
@@ -83,6 +83,7 @@
                 {% endif %}
             </div>
         {% endif %}
+        <hr>
         <div id="comment-form">
             {{ render_form(form) }}
         </div>
