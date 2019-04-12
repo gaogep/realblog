@@ -63,10 +63,10 @@ def show_post(post_id):
     return render_template('main/post.html', post=post, comments=comments, pagination=pagination, form=form)
 
 
-@main_bp.route('/comment/delete/<id>', methods=['POST'])
+@main_bp.route('/comment/delete/<int:comment_id>', methods=['POST'])
 @login_required
-def delete_comment(id):
-    comment = Comment.query.get(id)
+def delete_comment(comment_id):
+    comment = Comment.query.get(comment_id)
     db.session.delete(comment)
     db.session.commit()
     flash('评论删除成功', 'success')

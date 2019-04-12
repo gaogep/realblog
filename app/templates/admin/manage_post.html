@@ -5,7 +5,10 @@
 
 {% block content %}
     {% if posts %}
-        <table class="table table-hover mt-5">
+        <div class="mt-5">
+            <h3>总共{{ pagination.total }}篇文章</h3>
+        </div>
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>编号</th>
