@@ -4,13 +4,14 @@ from flask_login import UserMixin
 from markdown import markdown
 import bleach
 
-from .extensions import db
+from .extensions import db, whooshee
 
 
+@whooshee.register_model('username')
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     is_admin = db.Column(db.Boolean)
-    username = db.Column(db.String(20))
+    username = db.Column(db.String(20), index=True)  # 开启索引用于全文搜索
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.Text)
     confirmed = db.Column(db.Boolean, default=False)
@@ -25,13 +26,14 @@ class User(db.Model, UserMixin):
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True)
+    name = db.Column(db.String(30), unique=True, index=True)  # 开启索引用于全文搜索
     posts = db.relationship('Post', back_populates='category')
 
 
+@whooshee.register_model('title')
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200))
+    title = db.Column(db.String(200), index=True)  # 开启索引用于全文搜索
     content = db.Column(db.Text)
     html_content = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)

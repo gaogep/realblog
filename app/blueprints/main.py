@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app, flash, redirect, url_for, abort, make_response
 from flask_login import current_user, login_required
 
-from ..models import Post, Comment, Category
+from ..models import Post, Comment, Category, User
 from ..forms import CommentForm
 from ..extensions import db
 from ..tools import redirect_back
@@ -88,3 +88,24 @@ def change_theme(theme_name):
     response = make_response(redirect_back())
     response.set_cookie('theme', theme_name, max_age=30*24*60*60)
     return response
+
+
+# 使用flask_whooshee实现全文搜索
+@main_bp.route('/search')
+def search():
+    q = request.args.get('q', '')
+    if q == '':
+        flash('搜索内容为空', 'warning')
+        return redirect_back()
+
+    category = request.args.get('category', 'post')
+    page = request.args.get('page', 1, type=int)
+    per_page = current_app.config['BLOG_PER_PAGE']
+
+    if category == 'post':
+        pagination = Post.query.whooshee_search(q).paginate(page, per_page)
+    else:
+        pagination = User.query.whooshee_search(q).paginate(page, per_page)
+
+    results = pagination.items
+    return render_template('main/search.html', q=q, results=results, pagination=pagination, category=category)

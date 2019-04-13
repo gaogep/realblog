@@ -5,6 +5,7 @@ from flask_wtf import CSRFProtect
 from flask_login import LoginManager
 from flask_moment import Moment
 from flask_pagedown import PageDown
+from flask_whooshee import Whooshee
 
 
 bootstrap = Bootstrap()
@@ -14,6 +15,7 @@ csrf = CSRFProtect()
 login_manager = LoginManager()
 moment = Moment()
 pagedown = PageDown()
+whooshee = Whooshee()
 
 
 @login_manager.user_loader
