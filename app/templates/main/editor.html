@@ -4,7 +4,9 @@
 {% block title %}编辑文章{% endblock %}
 
 {% block content %}
-    {{ render_form(form) }}
+    <div class="editor mt-5 mb-5">
+        {{ render_form(form) }}
+    </div>
 {% endblock %}
 
 {% block scripts %}

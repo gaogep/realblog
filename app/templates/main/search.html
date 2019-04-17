@@ -4,39 +4,16 @@
 {% block title %}搜索{{ q }}的结果{% endblock %}
 
 {% block content %}
-    <div class="row mt-5">
-        <div class="col-md-3">
-            <div class="nav nav-pills flex-column" aria-orientation="vertical">
-                <a class="nav-item nav-link {% if category == 'post' %}active{% endif %}"
-                    href="{{ url_for('main.search', q=q, category='post') }}">文章</a>
-                <a class="nav-item nav-link {% if category == 'user' %}active{% endif %}"
-                   href="{{ url_for('main.search', q=q, category='user') }}">用户</a>
-            </div>
-        </div>
+    <div class="row mt-5 mb-5" >
         <div class="col-md-9">
-            <h3>共{{ results|length }}条结果</h3>
-            {% if results %}
-                {% if category == 'post' %}
-                    <ul class="list-group list-group-flush">
-                        {% for itme in results %}
-                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                <a href="{{ url_for('main.show_post', post_id=itme.id) }}">{{ itme.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                   {% for itme in results %}
-                        {{ itme.username }}
-                   {% endfor %}
-                {% endif %}
+            {% if posts %}
+                {% include 'main/posts.html' %}
             {% else %}
-                <h5>没有搜索结果</h5>
+                <h3>没有相关结果</h3>
             {% endif %}
         </div>
-    </div>
-    {% if results %}
-        <div class="page-footer">
-            {{ render_page(pagination, 'main.search', q=q, category=category) }}
+        <div class="col-md-3">
+            {% include 'main/sidebar.html' %}
         </div>
-    {% endif %}
+    </div>
 {% endblock %}

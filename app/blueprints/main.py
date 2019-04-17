@@ -98,14 +98,9 @@ def search():
         flash('搜索内容为空', 'warning')
         return redirect_back()
 
-    category = request.args.get('category', 'post')
+    category = 'post'
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLOG_PER_PAGE']
-
-    if category == 'post':
-        pagination = Post.query.whooshee_search(q).paginate(page, per_page)
-    else:
-        pagination = User.query.whooshee_search(q).paginate(page, per_page)
-
-    results = pagination.items
-    return render_template('main/search.html', q=q, results=results, pagination=pagination, category=category)
+    pagination = Post.query.whooshee_search(q).paginate(page, per_page)
+    posts = pagination.items
+    return render_template('main/search.html', q=q, posts=posts, pagination=pagination, category=category)

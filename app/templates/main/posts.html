@@ -81,6 +81,8 @@
     {% endfor %}
     {% if not filter %}
         {{ render_page(pagination, 'main.index') }}
+    {% elif q %}
+        {{ render_page(pagination, 'main.search', q=q, category=category) }}
     {% else %}
         {{ render_page(pagination, 'main.filter_post', cate=cate) }}
     {% endif %}

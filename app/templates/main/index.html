@@ -3,12 +3,12 @@
 {% block title %}主页{% endblock %}
 
 {% block content %}
-<div class="row mt-5 mb-5" >
-    <div class="col-md-9">
-        {% include 'main/posts.html' %}
+    <div class="row mt-5 mb-5" >
+        <div class="col-md-9">
+            {% include 'main/posts.html' %}
+        </div>
+        <div class="col-md-3">
+            {% include 'main/sidebar.html' %}
+        </div>
     </div>
-    <div class="col-md-3">
-        {% include 'main/sidebar.html' %}
-    </div>
-</div>
 {% endblock %}

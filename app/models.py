@@ -7,11 +7,10 @@ import bleach
 from .extensions import db, whooshee
 
 
-@whooshee.register_model('username')
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     is_admin = db.Column(db.Boolean)
-    username = db.Column(db.String(20), index=True)  # 开启索引用于全文搜索
+    username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.Text)
     confirmed = db.Column(db.Boolean, default=False)
@@ -26,7 +25,7 @@ class User(db.Model, UserMixin):
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True, index=True)  # 开启索引用于全文搜索
+    name = db.Column(db.String(30), unique=True)
     posts = db.relationship('Post', back_populates='category')
 
 
