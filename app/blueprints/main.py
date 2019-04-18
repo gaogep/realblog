@@ -77,7 +77,7 @@ def delete_comment(comment_id):
 def reply_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     return redirect(
-        url_for('.show_post', post_id=comment.post_id, reply=comment_id, author=comment.author) + '#comment-form')
+        url_for('main.show_post', post_id=comment.post_id, reply=comment_id, author=comment.author) + '#comment-form')
 
 
 @main_bp.route('/change-theme/<theme_name>')

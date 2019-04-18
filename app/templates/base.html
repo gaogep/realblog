@@ -32,6 +32,19 @@
                             <a class="nav-link" href="{{ url_for('admin.manage_post') }}">管理</a>
                         </li>
                     {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            主题
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url_for('main.change_theme', theme_name='bootstrap', next=request.full_path) }}">
+                                default
+                            </a>
+                            <a class="dropdown-item" href="{{ url_for('main.change_theme', theme_name='lumen', next=request.full_path) }}">
+                                lumen
+                            </a>
+                        </div>
+                    </li>
                 </ul>
                 <form  method="get" action="{{ url_for('main.search') }}">
                     <div class="form-inline">
@@ -65,6 +78,11 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 {% endblock scripts %}
 {{ moment.locale('zh-cn') }}
 </body>
