@@ -11,7 +11,6 @@
 
             i.author-icon {
                 margin-bottom: -3px;
-                margin-right: 3px;
                 display: inline-block;
                 width: 24px;
                 height: 24px;
@@ -22,7 +21,6 @@
 
             i.time-icon {
                 margin-bottom: -5px;
-                margin-right: 4px;
                 display: inline-block;
                 width: 24px;
                 height: 24px;
@@ -33,7 +31,6 @@
 
             i.category-icon {
                 margin-bottom: -5px;
-                margin-right: 4px;
                 display: inline-block;
                 width: 24px;
                 height: 24px;
@@ -44,11 +41,20 @@
 
             i.read-icon {
                 margin-bottom: -5px;
-                margin-right: 4px;
                 display: inline-block;
                 width: 24px;
                 height: 24px;
                 background-image: url("../../static/read.png");
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            i.correct-icon {
+                margin-bottom: -5px;
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background-image: url("../../static/correct.png");
                 background-position: center center;
                 background-repeat: no-repeat;
             }
@@ -61,20 +67,39 @@
                 {{ post.content|striptags|truncate(length=130) }}
             </p>
             <div class="d-flex justify-content-between">
-                <div class="author pl-3">
-                    <i class="author-icon"></i>{{ post.user.username }}
-                </div>
-                <div class="time">
-                    <i class="time-icon"></i>{{ moment(post.timestamp).format('L') }}
-                </div>
-                <div class="category">
-                    <i class="category-icon"></i>{{ post.category.name }}
-                </div>
-                <div class="read pr-3">
-                    <a href="{{ url_for('main.show_post', post_id=post.id) }}" class="read-article" style="color: black">
-                        <i class="read-icon"></i>阅读全文
-                    </a>
-                </div>
+                {% if not current_user.is_authenticated %}
+                    <div class="author pl-3">
+                        <i class="author-icon"></i>{{ post.user.username }}
+                    </div>
+                    <div class="time">
+                        <i class="time-icon"></i>{{ moment(post.timestamp).format('L') }}
+                    </div>
+                    <div class="category">
+                        <i class="category-icon"></i>{{ post.category.name }}
+                    </div>
+                    <div class="read pr-3">
+                        <a href="{{ url_for('main.show_post', post_id=post.id) }}" class="read-article" style="color: black">
+                            <i class="read-icon"></i>阅读全文
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="time pl-3">
+                        <i class="time-icon"></i>{{ moment(post.timestamp).format('L') }}
+                        </div>
+                    <div class="category">
+                        <i class="category-icon"></i>{{ post.category.name }}
+                    </div>
+                    <div class="read">
+                        <a href="{{ url_for('main.show_post', post_id=post.id) }}" class="read-article" style="color: black">
+                            <i class="read-icon"></i>阅读全文
+                        </a>
+                    </div>
+                    <div class="correct pr-3">
+                        <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="read-article" style="color: black">
+                            <i class="correct-icon"></i>修改文章
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <hr>

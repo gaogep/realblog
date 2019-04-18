@@ -58,7 +58,7 @@ def edit_post(post_id):
         db.session.commit()
         flash('修改成功', 'success')
         return redirect(url_for('main.show_post', post_id=post.id))
-    return render_template('main/editor.html', form=form)
+    return render_template('main/mk_editor.html', form=form)
 
 
 @admin_bp.route('/post/delete/<int:post_id>', methods=['POST'])
