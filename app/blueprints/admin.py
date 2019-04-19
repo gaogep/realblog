@@ -16,7 +16,7 @@ def login_protect():
     pass
 
 
-@admin_bp.route('/post/manage')
+@admin_bp.route('/manage/post')
 def manage_post():
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLOG_ADMIN_PER_PAGE']
@@ -46,18 +46,17 @@ def edit_post(post_id):
     post = Post.query.get(post_id)
     form = PostWritingFrom()
     form.category.choices = [(category.id, category.name) for category in Category.query.all()]
-    form.title.data = post.title
-    form.category.data = post.category.name
-    form.pagedown.data = post.content
     if form.validate_on_submit():
-        title = form.title.data
-        category = Category.query.get(form.category.data)
-        content = form.pagedown.data
-        post = Post(title=title, category=category, content=content, user=current_user._get_current_object())
+        post.title = form.title.data
+        post.category = Category.query.get(form.category.data)
+        post.content = form.pagedown.data
         db.session.add(post)
         db.session.commit()
         flash('修改成功', 'success')
         return redirect(url_for('main.show_post', post_id=post.id))
+    form.title.data = post.title
+    form.category.data = post.category.name
+    form.pagedown.data = post.content
     return render_template('main/mk_editor.html', form=form)
 
 
@@ -68,3 +67,33 @@ def delete_post(post_id):
     db.session.commit()
     flash('删除成功', 'success')
     return redirect_back()
+
+
+@admin_bp.route('/manage/category')
+def manage_category():
+    page = request.args.get('page', 1, type=int)
+    per_page = current_app.config['BLOG_ADMIN_PER_PAGE']
+    pagination = Category.query.paginate(page, per_page)
+    categories = pagination.items
+    return render_template('admin/manage_category.html', pagination=pagination, categories=categories)
+
+
+@admin_bp.route('/category/new', methods=['POST'])
+def new_category():
+    pass
+
+
+@admin_bp.route('/category/<category_id>')
+def edit_category(category_id):
+    pass
+
+
+@admin_bp.route('/category/delete/<int:category_id>', methods=['POST'])
+def delete_categroy(category_id):
+    category = Category.query.get_or_404(category_id)
+    if category.id == 1:
+        flash('无法删除默认分类', 'warning')
+        return redirect(url_for('main.index'))
+    category.delete()
+    flash('分类已删除', 'success')
+    return redirect(url_for('admin.manage_category'))

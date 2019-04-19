@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import render_page %}
+
+{% block title %}分类管理{% endblock %}
+
+
+{% block content %}
+    {% if categories %}
+        <div class="mt-5 mb-3">
+            <h3 style="display: inline">总共{{ pagination.total }}个类别</h3>
+            <span>
+                <a class="btn btn-success btn-sm float-right text-white">
+                    新建分类
+                </a>
+            </span>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>文章数</th>
+                    <th>管理</th>
+                </tr>
+            </thead>
+            {% for category in categories %}
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ loop.index + ((pagination.page - 1) * config.BLOG_ADMIN_PER_PAGE) }}
+                        </td>
+                        <td>
+                            <a class="text-dark" href="{{ url_for('main.filter_post', cate=category.name) }}">{{ category.name }}</a>
+                        </td>
+                        <td>
+                            {{ category.posts|length }}
+                        </td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{{ url_for('admin.new_category', category_id=category.id) }}">
+                                编辑
+                            </a>
+                            <form style="display: inline;" method="post" action="{{ url_for('admin.delete_categroy', category_id=category.id) }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                <button style="padding-top: 3px" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定删除吗?');">
+                                    删除
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+        <div class="mb-5 mt-3">
+            {{ render_page(pagination, 'admin.manage_category') }}
+        </div>
+    {% endif %}
+{% endblock %}

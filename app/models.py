@@ -28,6 +28,15 @@ class Category(db.Model):
     name = db.Column(db.String(30), unique=True)
     posts = db.relationship('Post', back_populates='category')
 
+    # 删除一个分类的时候把这个分类中的文章全部移到默认分类中
+    def delete(self):
+        default_category = Category.query.get(1)
+        posts = self.posts[:]
+        for post in posts:
+            post.category = default_category
+        db.session.delete(self)
+        db.session.commit()
+
 
 @whooshee.register_model('title')
 class Post(db.Model):
