@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from ..tools import redirect_back
 from ..models import Post, Category
 from ..extensions import db
-from ..forms import PostWritingFrom
+from ..forms import PostWritingForm, CategoryForm
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -27,7 +27,7 @@ def manage_post():
 
 @admin_bp.route('/post/new', methods=['GET', 'POST'])
 def new_post():
-    form = PostWritingFrom()
+    form = PostWritingForm()
     form.category.choices = [(category.id, category.name) for category in Category.query.all()]
     if form.validate_on_submit():
         title = form.title.data
@@ -44,7 +44,7 @@ def new_post():
 @admin_bp.route('/post/edit/<int:post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
     post = Post.query.get(post_id)
-    form = PostWritingFrom()
+    form = PostWritingForm()
     form.category.choices = [(category.id, category.name) for category in Category.query.all()]
     if form.validate_on_submit():
         post.title = form.title.data
@@ -78,14 +78,40 @@ def manage_category():
     return render_template('admin/manage_category.html', pagination=pagination, categories=categories)
 
 
-@admin_bp.route('/category/new', methods=['POST'])
+@admin_bp.route('/category/new', methods=['GET', 'POST'])
 def new_category():
-    pass
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category_name = form.category.data
+        cname_list = [c.name for c in (Category.query.all())]
+        if category_name in cname_list:
+            flash('类别重复', 'warning')
+            return redirect(url_for('admin.new_category'))
+        category = Category(name=category_name)
+        db.session.add(category)
+        db.session.commit()
+        flash('新建分类成功', 'success')
+        return redirect(url_for('main.index'))
+    return render_template('admin/build_category.html', form=form)
 
 
 @admin_bp.route('/category/<category_id>')
 def edit_category(category_id):
-    pass
+    category = Category.query.get(category_id)
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category_name = form.category.data
+        cname_list = [c.name for c in (Category.query.all())]
+        if category_name in cname_list:
+            flash('类别重复', 'warning')
+            return redirect(url_for('admin.new_category'))
+        category = Category(name=category_name)
+        db.session.add(category)
+        db.session.commit()
+        flash('新建分类成功', 'success')
+        return redirect_back()
+    form.category.data = category.name
+    return render_template('admin/build_category.html', form=form)
 
 
 @admin_bp.route('/category/delete/<int:category_id>', methods=['POST'])

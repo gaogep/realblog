@@ -40,8 +40,13 @@ class CommentForm(FlaskForm):
     submit = SubmitField('提交')
 
 
-class PostWritingFrom(FlaskForm):
+class PostWritingForm(FlaskForm):
     title = StringField('题目', validators=[DataRequired(), Length(1, 200)])
     category = SelectField('请选择分类', coerce=int, default=1)
     pagedown = PageDownField('写点什么吧', validators=[DataRequired()])
+    submit = SubmitField('提交')
+
+
+class CategoryForm(FlaskForm):
+    category = StringField('分类', validators=[DataRequired(), Length(1, 20)])
     submit = SubmitField('提交')

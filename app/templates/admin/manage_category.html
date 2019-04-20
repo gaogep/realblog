@@ -9,7 +9,7 @@
         <div class="mt-5 mb-3">
             <h3 style="display: inline">总共{{ pagination.total }}个类别</h3>
             <span>
-                <a class="btn btn-success btn-sm float-right text-white">
+                <a class="btn btn-success btn-sm float-right text-white" href="{{ url_for('admin.new_category') }}">
                     新建分类
                 </a>
             </span>
@@ -36,7 +36,7 @@
                             {{ category.posts|length }}
                         </td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ url_for('admin.new_category', category_id=category.id) }}">
+                            <a class="btn btn-info btn-sm" href="{{ url_for('admin.edit_category', category_id=category.id) }}">
                                 编辑
                             </a>
                             <form style="display: inline;" method="post" action="{{ url_for('admin.delete_categroy', category_id=category.id) }}">

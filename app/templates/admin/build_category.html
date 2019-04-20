@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}编辑分类{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        {{ render_form(form, extra_classes='col-6') }}
+    </div>
+{% endblock %}
