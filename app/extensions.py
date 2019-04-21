@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_moment import Moment
 from flask_pagedown import PageDown
 from flask_whooshee import Whooshee
+from flask_debugtoolbar import DebugToolbarExtension
 
 
 bootstrap = Bootstrap()
@@ -16,6 +17,7 @@ login_manager = LoginManager()
 moment = Moment()
 pagedown = PageDown()
 whooshee = Whooshee()
+# toolbar = DebugToolbarExtension()
 
 
 @login_manager.user_loader

@@ -16,6 +16,9 @@ class BaseConfig:
     # WHOOSHEE_DIR = 用于配置全局搜索的索引文件夹
     # 设置全文搜索的最小关键字
     WHOOSHEE_MIN_STRING_LEN = 1
+    # ---------------------------------------------------
+    # Flask_DebugToolbar关闭拦截重定向请求的特性
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 class DevConfig(BaseConfig):
