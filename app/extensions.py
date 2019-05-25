@@ -17,7 +17,7 @@ login_manager = LoginManager()
 moment = Moment()
 pagedown = PageDown()
 whooshee = Whooshee()
-# toolbar = DebugToolbarExtension()
+toolbar = DebugToolbarExtension()
 
 
 @login_manager.user_loader

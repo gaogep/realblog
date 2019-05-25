@@ -32,13 +32,13 @@ def new_post():
     if form.validate_on_submit():
         title = form.title.data
         category = Category.query.get(form.category.data)
-        content = form.pagedown.data
+        content = form.content.data
         post = Post(title=title, category=category, content=content, user=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()
         flash('发布成功', 'success')
         return redirect(url_for('main.show_post', post_id=post.id))
-    return render_template('main/editormd.html', form=form)
+    return render_template('main/mk_editor.html', form=form)
 
 
 @admin_bp.route('/post/edit/<int:post_id>', methods=['GET', 'POST'])
@@ -49,14 +49,14 @@ def edit_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.category = Category.query.get(form.category.data)
-        post.content = form.pagedown.data
+        post.content = form.content.data
         db.session.add(post)
         db.session.commit()
         flash('修改成功', 'success')
         return redirect(url_for('main.show_post', post_id=post.id))
     form.title.data = post.title
     form.category.data = post.category.name
-    form.pagedown.data = post.content
+    form.content.data = post.content
     return render_template('main/mk_editor.html', form=form)
 
 
