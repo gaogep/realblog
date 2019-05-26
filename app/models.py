@@ -54,11 +54,12 @@ class Post(db.Model):
 
 @db.event.listens_for(Post.content, 'set', named=True)
 def on_chenge_content(**kwargs):
-    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i'
-                    'li', 'ol', 'pre', 'strong', 'ul', 'h1', 'h2', 'h3', 'h4', 'h5', 'p']
+    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'del',
+                    'em', 'img', 'p', 'pre', 'strong', 'span', 'li', 'ul', 'ol', 'h1', 'h2', 'h3', 'h4', 'h5', 'div']
     # linkify函数->将纯文本中的url转换为合适的<a>链接
     kwargs['target'].html_content = bleach.linkify(bleach.clean(
-        markdown(kwargs['value'], output_format='html'), tags=allowed_tags, strip=True))
+        markdown(kwargs['value'], output_format='html',
+                 extensions=['markdown.extensions.toc', 'markdown.extensions.fenced_code']), tags=allowed_tags))
 
 
 class Comment(db.Model):

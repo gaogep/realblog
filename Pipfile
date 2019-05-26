@@ -17,6 +17,7 @@ python-dotenv = "*"
 faker = "*"
 sendgrid = "*"
 flask-debugtoolbar = "*"
+pyments = "*"
 
 [requires]
 python_version = "3.7"

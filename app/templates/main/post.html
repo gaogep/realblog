@@ -4,6 +4,11 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='../../static/css/atom-one-light.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="page-header mt-5 mb-3">
     <h2 class=>{{ post.title }}</h2>
@@ -93,4 +98,12 @@
         {% include 'main/sidebar.html' %}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='../../static/js/highlight.pack.js') }}"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
 {% endblock %}
