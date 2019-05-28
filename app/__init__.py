@@ -5,6 +5,7 @@ import click
 from .blueprints.main import main_bp
 from .blueprints.auth import auth_bp
 from .blueprints.admin import admin_bp
+from .apis.v1 import api_v1
 from .settings import config
 from .extensions import *
 from .models import *
@@ -27,6 +28,8 @@ def register_blueprints(app):
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(api_v1, subdomain='api', url_prefix='v1')
+    app.register_blueprint(api_v1, url_prefix='/api/v1')
 
 
 def register_extensions(app):
@@ -34,6 +37,7 @@ def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app)
     csrf.init_app(app)
+    csrf.exempt(api_v1)  # 因为api并不使用cookie认证用户 所以取消掉csrf保护
     login_manager.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)

@@ -43,7 +43,7 @@ def show_post(post_id):
 
     if current_user.is_authenticated:
         from_admin = True
-        form.author.data = "张鹏飞"
+        form.author.data = "管理员"
         form.email.data = "zpf1893@qq.com"
     else:
         from_admin = False
