@@ -64,7 +64,7 @@ def on_chenge_content(**kwargs):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String)
+    author = db.Column(db.String(30))
     content = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     from_admin = db.Column(db.Boolean, default=False)
