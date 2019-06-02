@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_wtf.csrf import CSRFError
 import click
 
@@ -64,13 +64,39 @@ def register_errors(app):
     def bad_request(e):
         return render_template('errors/400.html'), 400
 
+    # 根据HTTP内容协商机制来处理由Flask直接处理的错误 用以协调API
     @app.errorhandler(404)
     def page_not_found(e):
+        if request.accept_mimetypes.accept_json and \
+             not request.accept_mimetypes.accept_html:
+            response = jsonify(code=404, message='Not found')
+            response.status_code = 404
+            return response
         return render_template('errors/404.html'), 404
 
+    @app.errorhandler(405)  # 405错误只发生在API调用中
+    def method_not_allowed(e):
+        response = jsonify(code=405, message='The method is not allowed for the URL')
+        response.status_code = 405
+        return response
+
     @app.errorhandler(500)
-    def internal_server_error(e):
+    def page_not_found(e):
+        if request.accept_mimetypes.accept_json and \
+                not request.accept_mimetypes.accept_html:
+            response = jsonify(code=500, message='Internal server error')
+            response.status_code = 500
+            return response
         return render_template('errors/500.html'), 500
+
+    @app.errorhandler(503)
+    def page_not_found(e):
+        if request.accept_mimetypes.accept_json and \
+                not request.accept_mimetypes.accept_html:
+            response = jsonify(code=503, message='Service unavailable')
+            response.status_code = 503
+            return response
+        return render_template('errors/503.html'), 503
 
     @app.errorhandler(CSRFError)
     def handle_csrf_error(e):
