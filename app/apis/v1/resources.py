@@ -123,7 +123,7 @@ class AuthTokenAPI(MethodView):
         response.headers['Cache-control'] = 'no-store'  # HTTP/1.1缓存控制:缓存不应存储有关客户端请求或服务器响应的任何内容。
         response.headers['Pragma'] = 'no-cache'         # 用来向后兼容只支持 HTTP/1.0 协议的缓存服务器
         return response
-s
+
 
 api_v1.add_url_rule('/', view_func=IndexApI.as_view('index'), methods=['GET'])
 api_v1.add_url_rule('/categories/<int:category_id>', view_func=CategoryAPI.as_view('category'), methods=['GET', 'PUT', 'DELETE'])
