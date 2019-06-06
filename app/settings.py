@@ -29,11 +29,11 @@ class DevConfig(BaseConfig):
 
 
 class ProConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = '...'
+    SQLALCHEMY_DATABASE_URI = os.getenv('PRO_DB')
 
 
 class TestConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = '...'
+    SQLALCHEMY_DATABASE_URI = os.getenv('TES_DB')
 
 
 config = {'DEV': DevConfig, 'PRO': ProConfig, 'TEST': TestConfig}

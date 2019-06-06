@@ -1,1 +1,2 @@
 FLASK_ENV=devlopment
+CONFIG = DEV

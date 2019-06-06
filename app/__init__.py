@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_wtf.csrf import CSRFError
 import click
+import os
 
 from .blueprints.main import main_bp
 from .blueprints.auth import auth_bp
@@ -14,7 +15,7 @@ from .fakes import *
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config['DEV'])
+    app.config.from_object(config[os.getenv('CONFIG')])
     register_blueprints(app)
     register_extensions(app)
     register_shell_context(app)
