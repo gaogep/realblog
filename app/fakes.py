@@ -67,3 +67,10 @@ def fake_comments(cnt=200):
                           post=Post.query.get(parent_comment.post_id))
         db.session.add(comment)
     db.session.commit()
+
+
+def faking():
+    fake_user()
+    fake_categories(3)
+    fake_posts(5)
+    fake_comments(10)

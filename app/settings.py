@@ -33,7 +33,9 @@ class ProConfig(BaseConfig):
 
 
 class TestConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.getenv('TES_DB')
+    TESTING = True
+    WTF_CSRF_ENABLED = False  # 测试环境中关闭CSRF保护
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory'
 
 
 config = {'DEV': DevConfig, 'PRO': ProConfig, 'TEST': TestConfig}

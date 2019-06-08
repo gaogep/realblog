@@ -13,9 +13,11 @@ from .models import *
 from .fakes import *
 
 
-def create_app():
+def create_app(conf=None):
     app = Flask(__name__)
-    app.config.from_object(config[os.getenv('CONFIG')])
+    if not conf:
+        conf = 'DEV'
+    app.config.from_object(config[conf])
     register_blueprints(app)
     register_extensions(app)
     register_shell_context(app)
@@ -36,12 +38,10 @@ def register_blueprints(app):
 def register_extensions(app):
     bootstrap.init_app(app)
     db.init_app(app)
-    migrate.init_app(app)
     csrf.init_app(app)
     csrf.exempt(api_v1)  # 因为api并不使用cookie认证用户 所以取消掉csrf保护
     login_manager.init_app(app)
     moment.init_app(app)
-    pagedown.init_app(app)
     whooshee.init_app(app)
     toolbar.init_app(app)
 
@@ -110,7 +110,7 @@ def register_commands(app):
     @click.option('--post', default=50, help='生成虚拟文章')
     @click.option('--comment', default=200, help='生成虚拟评论')
     def build(category, post, comment):
-        """Generates some fake datas"""
+        """生成虚拟数据"""
         db.drop_all()
         db.create_all()
         click.echo('创建用户')
