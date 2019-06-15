@@ -4,7 +4,7 @@ from flask_wtf import CSRFProtect
 from flask_login import LoginManager
 from flask_moment import Moment
 from flask_whooshee import Whooshee
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 
 bootstrap = Bootstrap()
@@ -13,7 +13,7 @@ csrf = CSRFProtect()
 login_manager = LoginManager()
 moment = Moment()
 whooshee = Whooshee()
-toolbar = DebugToolbarExtension()
+# toolbar = DebugToolbarExtension()
 
 
 @login_manager.user_loader

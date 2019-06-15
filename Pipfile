@@ -1,6 +1,6 @@
 [[source]]
-name = "tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple"
 verify_ssl = true
 
 [dev-packages]
@@ -16,8 +16,14 @@ flask-migrate = "*"
 python-dotenv = "*"
 faker = "*"
 sendgrid = "*"
-flask-debugtoolbar = "*"
-pyments = "*"
+markdown = "*"
+bleach = "*"
+flask-caching = "*"
+flask-cors = "*"
+flask-whooshee = "*"
+pymysql = "*"
+mysql-python = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
