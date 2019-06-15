@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_wtf.csrf import CSRFError
 import click
-import os
 
 from .blueprints.main import main_bp
 from .blueprints.auth import auth_bp
@@ -31,7 +30,6 @@ def register_blueprints(app):
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
-    # app.register_blueprint(api_v1, subdomain='api', url_prefix='v1')
     app.register_blueprint(api_v1, url_prefix='/api/v1')
 
 
@@ -57,7 +55,9 @@ def register_template_context(app):
     def make_template_context():
         user = User.query.first()
         categories = Category.query.order_by(Category.id).all()
-        return dict(user=user, categories=categories)
+        category_num = len(categories)
+        post_num = Post.query.count()
+        return dict(user=user, categories=categories, post_num=post_num, category_num=category_num)
 
 
 def register_errors(app):

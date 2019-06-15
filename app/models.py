@@ -54,7 +54,7 @@ class Post(db.Model):
 
 @db.event.listens_for(Post.content, 'set', named=True)
 def on_chenge_content(**kwargs):
-    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'del',
+    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'del', 'hr',
                     'em', 'img', 'p', 'pre', 'strong', 'span', 'li', 'ul', 'ol', 'h1', 'h2', 'h3', 'h4', 'h5', 'div']
     # linkify函数->将纯文本中的url转换为合适的<a>链接
     kwargs['target'].html_content = bleach.linkify(bleach.clean(

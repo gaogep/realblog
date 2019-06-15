@@ -1,75 +1,22 @@
 {% from 'macros.html' import render_page %}
 
 {% if posts %}
-    {% block style %}
-        <style>
-            div.article-zone {
-                background-color: #fff;
-                margin-bottom: 30px;
-                padding-bottom: 15px;
-            }
-
-            i.author-icon {
-                margin-bottom: -3px;
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-image: url("../../static/author.png");
-                background-position: center center;
-                background-repeat: no-repeat;
-            }
-
-            i.time-icon {
-                margin-bottom: -5px;
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-image: url("../../static/time.png");
-                background-position: center center;
-                background-repeat: no-repeat;
-            }
-
-            i.category-icon {
-                margin-bottom: -5px;
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-image: url("../../static/category.png");
-                background-position: center center;
-                background-repeat: no-repeat;
-            }
-
-            i.read-icon {
-                margin-bottom: -5px;
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-image: url("../../static/read.png");
-                background-position: center center;
-                background-repeat: no-repeat;
-            }
-
-            i.correct-icon {
-                margin-bottom: -5px;
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-image: url("../../static/correct.png");
-                background-position: center center;
-                background-repeat: no-repeat;
-            }
-        </style>
+    {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mycss.css') }}">
     {% endblock %}
+    <form class="form-inline mb-3 pl-3" method="get" action="{{ url_for('main.search') }}">
+        <label>
+            <input class="form-control" placeholder="搜索文章" type="text" name="q" style="width: 700px">
+        </label>
+        <button type="submit" class="btn btn-light pl-3">搜一搜</button>
+    </form>
     {% for post in posts %}
         <div class="article-zone">
-            <h5 class="blog-title pl-3 pr-3 pt-3"><strong>{{ post.title }}</strong></h5>
-            <p class="blog-content pl-3 pr-3 mt-1 text-justify" >
-                {{ post.content|striptags|truncate(length=130) }}
-            </p>
+            <h5 class="blog-title pl-3 pr-3 pt-3">{{ post.title }}</h5>
             <div class="d-flex justify-content-between">
                 {% if not current_user.is_authenticated %}
                     <div class="author pl-3">
-                        <i class="author-icon"></i>{{ post.user.username }}
+                        <i class="author-icon"></i>张鹏飞
                     </div>
                     <div class="time">
                         <i class="time-icon"></i>{{ moment(post.timestamp).format('L') }}

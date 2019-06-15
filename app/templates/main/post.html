@@ -10,20 +10,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header mt-5 mb-3">
-    <h2 class=>{{ post.title }}</h2>
-    <div class="d-flex flex-column pl-1">
-        <div class="category-badge">
-            <span>分类:{{ post.category.name }}</span>
-        </div>
-        <div class="time-badge">
-            <span>时间:{{ moment(post.timestamp).format('L') }}</span>
-        </div>
-    </div>
-</div>
-<div class="row mb-2 mb-5">
+<div class="row mb-2 mb-5 mt-5">
     <div class="col-md-9 text-justify">
-        <hr>
         <p>
             {% if post.html_content %}
                 {{ post.html_content|safe }}
@@ -89,10 +77,11 @@
                 {% endif %}
             </div>
         {% endif %}
-        <hr>
-        <div id="comment-form">
-            {{ render_form(form) }}
-        </div>
+        {% if current_user.is_authenticated %}
+            <div id="comment-form">
+                {{ render_form(form) }}
+            </div>
+        {% endif %}
     </div>
     <div class="col-md-3">
         {% include 'main/sidebar.html' %}

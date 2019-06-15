@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/%s.min.css' % request.cookies.get('theme', 'bootstrap')) }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% endblock head %}
-    {% block style %}{% endblock %}
 </head>
 <body>
 {% block nav %}
@@ -56,11 +55,6 @@
                         </div>
                     </li>
                 </ul>
-                <form  method="get" action="{{ url_for('main.search') }}">
-                    <div class="form-inline">
-                        <input placeholder="搜索文章" type="text" name="q">
-                    </div>
-                </form>
                 {% if not current_user.is_authenticated %}
                     <a class="login btn btn-sm btn-success" href="{{ url_for('auth.login') }}">登录</a>
                 {% else %}
@@ -88,11 +82,6 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     {{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
-    <script>
-        $((function() {
-            $('[data-toggle="popover"]').popover();
-        });
-    </script>
 {% endblock scripts %}
 {{ moment.locale('zh-cn') }}
 </body>

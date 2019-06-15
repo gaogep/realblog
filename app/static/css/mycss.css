@@ -1,0 +1,64 @@
+div.article-zone {
+    background-color: #fff;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+i.author-icon {
+    margin-bottom: -3px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../static/author.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+i.time-icon {
+    margin-bottom: -5px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../static/time.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+i.category-icon {
+    margin-bottom: -5px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../static/category.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+i.read-icon {
+    margin-bottom: -5px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../static/read.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+i.correct-icon {
+    margin-bottom: -5px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../static/correct.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+div.card {
+    position: relative;
+    left: 20px;
+}
+
+a.connection {
+    color: black;
+}

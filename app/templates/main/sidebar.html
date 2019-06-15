@@ -1,19 +1,9 @@
 {% if categories %}
-    {% block style %}
-        <style>
-            div.card {
-                position: relative;
-                left: 20px;
-            }
-
-            a.connection {
-                color: black;
-            }
-        </style>
+    {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mycss.css') }}">
     {% endblock %}
-
     <div class="card">
-        <div class="card-header">文章分类</div>
+        <div class="card-header">{{ moment().format('YYYY-MM-DD HH:mm:ss') }}</div>
         <ul class="list-group list-group-flush">
             {% for category in categories %}
             <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -24,17 +14,3 @@
         </ul>
     </div>
 {% endif %}
-<div class="card">
-    <div class="card-header">关于我</div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a class="connection" href="https://github.com/gaogep">GitHub</a>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a data-toggle="popover" data-placement="right" data-content="zpf1893@qq.com">QQmail</a>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a data-toggle="popover" data-placement="right" data-content="plldhdb@gmail.com">Gmail</a>
-        </li>
-    </ul>
-</div>
