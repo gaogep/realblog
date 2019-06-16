@@ -38,7 +38,7 @@
 
 {% block scripts %}
 {{ super() }}
-<script src="{{ url_for('static',filename='../../static/editormd/editormd.js') }}"></script>
+<script src="{{ url_for('static',filename='editormd/editormd.js') }}"></script>
 <script type="text/javascript">
     var editor;
     editor = editormd("mkeditor", {
