@@ -8,6 +8,7 @@
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/%s.min.css' % request.cookies.get('theme', 'bootstrap')) }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% block style %}{% endblock %}
     {% endblock head %}
 </head>
 <body>
