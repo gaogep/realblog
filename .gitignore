@@ -3,3 +3,6 @@
 *.iml
 .env
 *.lock
+whooshee/
+log/
+editormd/
